@@ -14,7 +14,6 @@ public class Stack {
     public void push (int input) {
         if(top == size - 1) {
             System.out.println("Stack is full, cannot push any new elements");
-            System.exit(-1);
         } else {
             arr[++top] = input;
         }
@@ -22,18 +21,19 @@ public class Stack {
     }
 
     public int pop () {
-        if (isEmpty()) {
+        if (!isEmpty()) {
+            return arr[top--]; 
+        } else {
             System.out.println("No elements in the stack");
-            System.exit(-1);
-        }  
-        return arr[top--];   
+            return -1;
+        }
     }
 
     public int top () {
         if(!isEmpty()) {
             return arr[top];
         } else {
-            System.exit(-1);
+            System.out.println("No top element");
         }
         return -1;
     }
@@ -64,7 +64,25 @@ public class Stack {
             //prints “Size of stack: 0”
         
         System.out.println("Popped value:" + myStack.pop());
-            //prints "-1"
+            //prints -1 since its empty;
+            //prints "No elements in the stack"
+            
+        // Adding new values to the stack
+        myStack.push(1);
+        myStack.push(2);
+        myStack.push(3);
+
+        System.out.println("Top of stack: "+ myStack.top());
+            // prints “Top of stack: 3”
+        
+        System.out.println("Size of stack: " + myStack.size());
+            // prints “Size of stack: 3”
+
+        myStack.pop();
+
+        System.out.println("Top of stack: "+ myStack.top());
+            // prints “Top of stack: 2”
+        
 
     }
 
