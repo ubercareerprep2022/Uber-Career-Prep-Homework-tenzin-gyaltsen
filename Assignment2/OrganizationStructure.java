@@ -24,18 +24,18 @@ public class OrganizationStructure {
         }
     }
 
-    // if the employee has a list of direct reporter, then print the list of
-    // employees
+    // if the employee has a list of direct reporter, then print the list of employees and update employees at same level
     // then, go by each direct reportee, and check if it also has direct reportee,
     // and follow the same pattern
     // if they don't, we don't print
     public void printLevelByLevel() {
         int employeesAtSameLevel = 1;
         while (!employees.isEmpty()) {
-            // pop the queue and print the employee
+            // pop the queue and print the employee, and reduce employee at same level by one count
             // if that employee has direct reportee,
             // check if each employee has direct reportee
             // add direct report to the queue
+            // when employee at same level is 0, then update the length of employee at same level by the size of queue and direct report size
             Employee cEmployee = employees.poll();
             employeesAtSameLevel--;
             System.out.print(cEmployee.title + "   ");
