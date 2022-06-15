@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.*;;
 
 public class OrganizationStructure {
-    public Employee ceo;
+    private Employee ceo;
     private Queue<Employee> employees = new LinkedList<>();
 
     public OrganizationStructure(Employee ceo) {
@@ -14,10 +14,27 @@ public class OrganizationStructure {
         employees.add(ceo);
     }
 
+    public Employee getCeo () {
+        return ceo;
+    }
+
     public static class Employee {
-        public String name;
-        public String title;
+        private String name;
+        private String title;
         private List<Employee> directReports = new ArrayList<>();
+
+        public Employee (String name, String title) {
+            this.name = name;
+            this.title = title;
+        }
+
+        public String getName () {
+            return name;
+        }
+
+        public String getTitle () {
+            return title;
+        }
 
         public void addDirectReports(Employee dEmployee) {
             directReports.add(dEmployee);
@@ -29,7 +46,9 @@ public class OrganizationStructure {
     // and follow the same pattern
     // if they don't, we don't print
     public void printLevelByLevel() {
-        int employeesAtSameLevel = 1;
+        employees.clear();
+        employees.add(ceo);
+        int employeesAtSameLevel = employees.size();
         while (!employees.isEmpty()) {
             // pop the queue and print the employee, and reduce employee at same level by one count
             // if that employee has direct reportee,
@@ -40,7 +59,7 @@ public class OrganizationStructure {
             employeesAtSameLevel--;
             System.out.print(cEmployee.title + "   ");
 
-            if (employeesAtSameLevel == 0 && !(employeesAtSameLevel < 0)) {
+            if (employeesAtSameLevel == 0) {
                 System.out.println();
                 employeesAtSameLevel += employees.size() + cEmployee.directReports.size();
             } 
@@ -55,39 +74,26 @@ public class OrganizationStructure {
 
     public static void main(String[] args) {
 
-        Employee ceo = new Employee();
-        ceo.name = "Braden";
-        ceo.title = "CEO";
-
+        Employee ceo = new Employee("Braden", "CEO");
         OrganizationStructure sparrow = new OrganizationStructure(ceo);
 
         // subemployee
-        Employee cfo = new Employee();
-        cfo.name = "Gautam";
-        cfo.title = "CFO";
-
-        Employee cto = new Employee();
-        cto.name = "Shubham";
-        cto.title = "CTO";
-
+        Employee cfo = new Employee("Gautam", "CFO");
+        Employee cto = new Employee("Shubham", "CTO");
         ceo.addDirectReports(cfo);
         ceo.addDirectReports(cto);
 
-        Employee finAdvisor = new Employee();
-        finAdvisor.name = "Raju";
-        finAdvisor.title = "Advisor";
+        Employee finAdvisor = new Employee("Raju", "Advisor");
         cfo.addDirectReports(finAdvisor);
 
-        Employee manager = new Employee();
-        manager.name = "Rahul";
-        manager.title = "Manager";
+        Employee manager = new Employee("Rahul", "Manager");
         cto.addDirectReports(manager);
 
-        Employee assistant = new Employee();
-        assistant.name = "Tashi";
-        assistant.title = "Assistant";
+        Employee assistant = new Employee("Tashi", "Assistant");
         manager.addDirectReports(assistant);
 
+        sparrow.printLevelByLevel();
+        System.out.println();
         sparrow.printLevelByLevel();
     }
 }
