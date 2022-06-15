@@ -8,9 +8,11 @@ import java.util.*;;
 public class OrganizationStructure {
     private Employee ceo;
     private Queue<Employee> employees = new LinkedList<>();
+    private int levels;
 
     public OrganizationStructure(Employee ceo) {
         this.ceo = ceo;
+        levels = 1;
         employees.add(ceo);
     }
 
@@ -46,6 +48,11 @@ public class OrganizationStructure {
     // and follow the same pattern
     // if they don't, we don't print
     public void printLevelByLevel() {
+        traverseOrgByLevel(true);
+    }
+
+    public int traverseOrgByLevel (Boolean toPrint) {
+        levels = 0;
         employees.clear();
         employees.add(ceo);
         int employeesAtSameLevel = employees.size();
@@ -57,11 +64,17 @@ public class OrganizationStructure {
             // when employee at same level is 0, then update the length of employee at same level by the size of queue and direct report size
             Employee cEmployee = employees.poll();
             employeesAtSameLevel--;
-            System.out.print(cEmployee.title + "   ");
+            
+            if(toPrint) {
+                System.out.print(cEmployee.title + "   ");
+            }
 
             if (employeesAtSameLevel == 0) {
-                System.out.println();
+                if(toPrint) {
+                    System.out.println();
+                }
                 employeesAtSameLevel += employees.size() + cEmployee.directReports.size();
+                levels++;
             } 
 
             if (cEmployee.directReports.size() > 0) {
@@ -70,6 +83,11 @@ public class OrganizationStructure {
                 }
             }
         }
+        return levels;
+    }
+
+    public void printNumLevels () {
+        System.out.println(traverseOrgByLevel(false));
     }
 
     public static void main(String[] args) {
@@ -94,6 +112,6 @@ public class OrganizationStructure {
 
         sparrow.printLevelByLevel();
         System.out.println();
-        sparrow.printLevelByLevel();
+        sparrow.printNumLevels();
     }
 }
