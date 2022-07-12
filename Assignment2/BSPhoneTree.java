@@ -5,11 +5,11 @@ import java.util.Comparator;
 public class BSPhoneTree {
 
     public static class Node {
-        public String key;
+        public phoneNumber key;
         public Node left;
         public Node right;
 
-        public Node(String key) {
+        public Node(phoneNumber key) {
             this.key = key;
             left = null;
             right = null;
@@ -18,7 +18,7 @@ public class BSPhoneTree {
 
     private Node root;
 
-    public BSPhoneTree(String rootValue) {
+    public BSPhoneTree(phoneNumber rootValue) {
         root = new Node(rootValue);
     }
 
@@ -33,16 +33,16 @@ public class BSPhoneTree {
      * 
      * @param key The key to insert.
      */
-    public Node insert(Node root, String key) {
+    public Node insert(Node root, phoneNumber key) {
         // Please implement this method.
         if (root == null) {
             root = new Node(key);
             return root;
         }
 
-        if (compare(key, root.key) < 0) {
+        if (compare(key.getName(), root.key.getName()) < 0) {
             root.left = insert(root.left, key);
-        } else if (compare(key, root.key) > 0) {
+        } else if (compare(key.getName(), root.key.getName()) > 0) {
             root.right = insert(root.right, key);
         }
 
@@ -58,23 +58,23 @@ public class BSPhoneTree {
      * @return true if the key is present in this binary search tree, false
      *         otherwise.
      */
-    public boolean find(Node currRoot, String key) {
+    public long find(Node currRoot, phoneNumber key) {
         // Please implement this method.
         if (currRoot == null) {
-            return false;
+            return -1;
         }
 
-        if (key == currRoot.key) {
-            return true;
+        if (key.getName()== currRoot.key.getName()) {
+            return currRoot.key.getPhoneNumber();
         }
 
-        if (compare(key, currRoot.key) < 0) {
+        if (compare(key.getName(), currRoot.key.getName()) < 0) {
             return find(currRoot.left, key);
-        } else if (compare(key, currRoot.key) > 0) {
+        } else if (compare(key.getName(), currRoot.key.getName()) > 0) {
             return find(currRoot.right, key);
         }
 
-        return false;
+        return -1;
     }
 
     public void printInorder(Node root) {
@@ -83,7 +83,7 @@ public class BSPhoneTree {
         }
 
         printInorder(root.left);
-        System.out.print(root.key + " ");
+        System.out.println(root.key.getName() + " " + root.key.getPhoneNumber());
         printInorder(root.right);
     }
 
