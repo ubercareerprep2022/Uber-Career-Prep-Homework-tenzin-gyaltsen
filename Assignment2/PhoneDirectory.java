@@ -24,5 +24,21 @@ public class PhoneDirectory implements PhoneBook {
         }
         return -1;
     }
+
+    public int getListSize(){
+        return phoneList.size();
+    }
+
+    public void printAll () {
+        System.out.println(" name: " + phoneList.get(0).getName() + "  number: " + phoneList.get(0).getPhoneNumber());
+    }
+
+
+    public static void main(String[] args) {
+        PhoneDirectory phone = new PhoneDirectory();
+        phone.insert("Bhusang", 505419348);
+        phone.insert("Tashi DHondup", 351945821);
+        phone.printAll();
+    }
     
 }

@@ -19,13 +19,11 @@ public class PhoneTree implements PhoneBook{
 
     @Override
     public void insert(String name, long number) {
-        // TODO Auto-generated method stub
         binaryPhoneTree.insert(binaryPhoneTree.getRoot(), new phoneNumber(name, number));
     }
 
     @Override
     public long find(String name) {
-        // TODO Auto-generated method stub
         return binaryPhoneTree.find(binaryPhoneTree.getRoot(), new phoneNumber(name, 0000));
     }
 
