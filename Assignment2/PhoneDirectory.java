@@ -39,6 +39,10 @@ public class PhoneDirectory implements PhoneBook {
         phone.insert("Bhusang", 505419348);
         phone.insert("Tashi DHondup", 351945821);
         phone.printAll();
+
+        int[] intArrays = new int[10];
+        intArrays[0] = 1;
+        System.out.println(intArrays[0]);
     }
     
 }
